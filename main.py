@@ -2,7 +2,7 @@ import streamlit as st
 header = st.container()
 texte = st.container()
 with header:
-    st.title("HELLO LES AMIS!!!! :duck: :pizza:")
+    st.title("HELLO LES AMIS!!!! :duck: :pizza: :beer:")
 
 with texte:
     st.subheader("Cela ressemble à ça d'écrire avec streamlit")
