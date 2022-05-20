@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from pathlib import Path
+
+#Path pour streamlit
+csv_path = Path(__file__).parents[1]/'Projet_Python/tmdb_movies_data.csv'
 
 # Pour montrer toutes les colonnes d'un dataframe
 pd.set_option('display.max_columns', None)
 
 # Chargement des données
-data = pd.read_csv("/Users/marcochavez/Desktop/Projet_Python/tmdb_movies_data.csv")
+data = pd.read_csv(csv_path)
 
 # Création du dataframe
 movies_df = pd.DataFrame(data)
