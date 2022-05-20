@@ -72,6 +72,9 @@ actor_choice = st.multiselect("Choose your favorite actresses and actors!", uniq
 genre_choise = st.multiselect("Choose your favorite genres!", unique_genres)
 keywords_choice = st.multiselect("Any keywords?", unique_keywords)
 
+if st.button('Show my results!'):
+    st.write(':poop:')
+
 
 # Datacamp
 #from sklearn.feature_extraction.text import TfidfVectorizer
