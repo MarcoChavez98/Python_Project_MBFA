@@ -6,7 +6,7 @@ import numpy as np
 pd.set_option('display.max_columns', None)
 
 # Chargement des données
-data = pd.read_csv("https://github.com/MarcoChavez98/Python_Project_MBFA/blob/main/tmdb_movies_data.csv")
+data = pd.read_csv("/Users/marcochavez/Desktop/Projet_Python/tmdb_movies_data.csv")
 
 # Création du dataframe
 movies_df = pd.DataFrame(data)
