@@ -67,7 +67,7 @@ st.header('Spending more time choosing a movie than watching it?')
 st.subheader('Try our movie recommendator based on your preferences!')
 st.caption('Choose as many as you want')
 
-title_choice = st.multiselect("Choose your favorite **movies**!", unique_titles)
+title_choice = st.multiselect("Choose your favorite movies!", unique_titles)
 actor_choice = st.multiselect("Choose your favorite actresses and actors!", unique_actors)
 genre_choise = st.multiselect("Choose your favorite genres!", unique_genres)
 keywords_choice = st.multiselect("Any keywords?", unique_keywords)
