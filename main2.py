@@ -62,7 +62,7 @@ st.subheader('Try our movie recommendator based on your preferences!')
 st.caption('Choose as many genres as you want')
 
 #title_choice = st.multiselect("Choose your favorite movie!", unique_titles)
-actor_choice = st.multiselect("Choose your favorite actresses and actors!", unique_actors)
+#actor_choice = st.multiselect("Choose your favorite actresses and actors!", unique_actors)
 genre_choice = st.multiselect("Choose your favorite genres!", unique_genres)
 #keywords_choice = st.multiselect("Any keywords?", unique_keywords)
 number_of_films = st.slider('How many recommendations do you want?', min_value=1, max_value=10, value=5)
@@ -70,11 +70,11 @@ number_of_films = st.slider('How many recommendations do you want?', min_value=1
 # Avec la ligne suivante on transforme la liste générée par le multiselect en string pour pouvoir le passer en
 # argument dans la fonction build_chart
 genre_choice_str = ', '.join(genre_choice)
-actor_choice_str = ', '.join(actor_choice)
+
 
 # On filtre la data par rapport à ce qui est choisi dans les multiselect
 # selected_title = mvoies_data[(movies_data['titles'].isin(title_choice))]
-selected_actor = movies_data[(movies_data['cast'].isin(actor_choice))]
+#selected_actor = movies_data[(movies_data['cast'].isin(actor_choice))]
 selected_genre = movies_data[(movies_data['genres'].isin(genre_choice))]
 #selected_keywords = movies_data[(movies_data['keywords'].isin(keywords_choice))]
 
@@ -93,21 +93,8 @@ def build_chart(genre, percentile=0.7):
     return qualified
 
 
-def build_chart2(actors, percentile=0.7):
-    dc = movies_data[movies_data['cast'] == actors]
-    mean_votes = vote_averages.mean()
-    minimum = vote_counts.quantile(percentile)
-    qualified = dc[(dc['vote_count'] >= minimum) & (dc['vote_count'].notnull()) & (dc['vote_average'].notnull())][
-        ['title', 'genres', 'overview', 'release_year', 'vote_count', 'vote_average']]
-    qualified['weighted_avg'] = qualified.apply(
-        lambda x: (x['vote_count'] / (x['vote_count'] + minimum) * x['vote_average']) + (
-                minimum / (minimum + x['vote_count']) * mean_votes), axis=1)
-    qualified = qualified.sort_values('weighted_avg', ascending=False).head(250)
-
-    return qualified
-
 if st.button('Go!'):
     st.subheader('Here are your results! :popcorn:')
     st.dataframe(build_chart(genre_choice_str).head(number_of_films), height = 2000)
-    st.dataframe(build_chart2(actor_choice_str).head(number_of_films), height = 2000)
+  
     
