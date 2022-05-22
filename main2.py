@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import sklearn
+import scikit-learn
 
 
 # Pour montrer toutes les colonnes d'un dataframe
