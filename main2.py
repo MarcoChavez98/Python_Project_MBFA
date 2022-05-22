@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-
 # Pour montrer toutes les colonnes d'un dataframe
 pd.set_option('display.max_columns', None)
 
@@ -94,8 +93,8 @@ def build_chart(genre, percentile=0.7):
     return qualified
 
 
-def build_chart2(cast, percentile=0.7):
-    dc = movies_data[movies_data['cast'] == cast]
+def build_chart2(actors, percentile=0.7):
+    dc = movies_data[movies_data['cast'] == actors]
     mean_votes = vote_averages.mean()
     minimum = vote_counts.quantile(percentile)
     qualified = dc[(dc['vote_count'] >= minimum) & (dc['vote_count'].notnull()) & (dc['vote_average'].notnull())][
