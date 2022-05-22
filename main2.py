@@ -78,16 +78,6 @@ actor_choice_str = ', '.join(actor_choice)
 selected_actor = movies_data[(movies_data['cast'].isin(actor_choice))]
 
 
-def build_chart2(cast, percentile=0.7):
-    dc = movies_data[movies_data['cast'] == cast]
-    mean_votes = vote_averages.mean()
-    minimum = vote_counts.quantile(percentile)
-    qualified = dc[(dc['vote_count'] >= minimum) & (dc['vote_count'].notnull()) & (dc['vote_average'].notnull())][
-        ['title', 'genres', 'overview', 'release_year', 'vote_count', 'vote_average']]
-    qualified['weighted_avg'] = qualified.apply(
-        lambda x: (x['vote_count'] / (x['vote_count'] + minimum) * x['vote_average']) + (
-                minimum / (minimum + x['vote_count']) * mean_votes), axis=1)
-    qualified = qualified.sort_values('weighted_avg', ascending=False).head(250)
     
 selected_genre = movies_data[(movies_data['genres'].isin(genre_choice))]
 #selected_keywords = movies_data[(movies_data['keywords'].isin(keywords_choice))]
@@ -105,6 +95,17 @@ def build_chart(genre, percentile=0.7):
     qualified = qualified.sort_values('weighted_avg', ascending=False).head(250)
 
     return qualified
+
+def build_chart2(cast, percentile=0.7):
+    dc = movies_data[movies_data['cast'] == cast]
+    mean_votes = vote_averages.mean()
+    minimum = vote_counts.quantile(percentile)
+    qualified = dc[(dc['vote_count'] >= minimum) & (dc['vote_count'].notnull()) & (dc['vote_average'].notnull())][
+        ['title', 'genres', 'overview', 'release_year', 'vote_count', 'vote_average']]
+    qualified['weighted_avg'] = qualified.apply(
+        lambda x: (x['vote_count'] / (x['vote_count'] + minimum) * x['vote_average']) + (
+                minimum / (minimum + x['vote_count']) * mean_votes), axis=1)
+    qualified = qualified.sort_values('weighted_avg', ascending=False).head(250)
 
 
 if st.button('Go!'):
