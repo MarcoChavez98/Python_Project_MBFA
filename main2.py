@@ -1,8 +1,5 @@
 import streamlit as st
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
-
 
 # Pour montrer toutes les colonnes d'un dataframe
 pd.set_option('display.max_columns', None)
@@ -52,28 +49,6 @@ votes_data.dropna(inplace=True)
 vote_counts = votes_data['vote_count']
 vote_averages = votes_data['vote_average']
 
-#On crée un nouveau dataframe afin de recommander 30 films grâce à une analyse textuelle basée sur le descriptif du film
-
-data_cbr=data.copy()
-
-data_cbr['tagline']=data_cbr['tagline'].astype('str')
-data_cbr['overview']=data_cbr['overview'].astype('str')
-
-data_cbr['tagline'] = data_cbr['tagline'].fillna('')
-data_cbr['description'] = data_cbr['overview'] + data_cbr['tagline']
-data_cbr['description'] = data_cbr['description'].fillna('')
-
-#On traite le dataframe pour ne garder que les termes qui nous sont utiles
-#Le min_def permet d'enlever les mots qui n'apparaissent pas assez souvent, les stop_words servent à enlever les mots qui sont inutiles d'indexer ("you", "the")
-
-tf = TfidfVectorizer(analyzer='word',ngram_range=(1, 2),min_df=0, stop_words='english')
-tfidf_matrix = tf.fit_transform(data_cbr['description'])
-
-cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
-cosine_sim[0]
-data_cbr = data_cbr.reset_index()
-titles = data_cbr['original_title']
-indices = pd.Series(data_cbr.index, index=data_cbr['original_title'])
 
 # Streamlit
 st.title('Movie recommendator :popcorn: :movie_camera:')
@@ -86,7 +61,7 @@ st.header('Spending more time choosing a movie than watching it?')
 st.subheader('Try our movie recommendator based on your preferences!')
 st.caption('Choose as many genres as you want')
 
-title_choice = st.multiselect("Choose your favorite movie!", unique_titles)
+#title_choice = st.multiselect("Choose your favorite movie!", unique_titles)
 #actor_choice = st.multiselect("Choose your favorite actresses and actors!", unique_actors)
 genre_choice = st.multiselect("Choose your favorite genres!", unique_genres)
 #keywords_choice = st.multiselect("Any keywords?", unique_keywords)
@@ -97,20 +72,7 @@ number_of_films = st.slider('How many recommendations do you want?', min_value=1
 genre_choice_str = ', '.join(genre_choice)
 
 # On filtre la data par rapport à ce qui est choisi dans les multiselect
-selected_title = data_cbr[(data_cbr['titles'].isin(title_choice))]
-
-def get_recommendations(title):
-    idx = indices[title]
-    sim_scores = list(enumerate(cosine_sim[idx]))
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[1:31]
-    movie_indices = [i[0] for i in sim_scores]
-    return titles.iloc[movie_indices]
-
-get_recommendations('The Godfather').head(10)
-
-
-
+# selected_title = mvoies_data[(movies_data['titles'].isin(title_choice))]
 #selected_actor = movies_data[(movies_data['cast'].isin(actor_choice))]
 selected_genre = movies_data[(movies_data['genres'].isin(genre_choice))]
 #selected_keywords = movies_data[(movies_data['keywords'].isin(keywords_choice))]
