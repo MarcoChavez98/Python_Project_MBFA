@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-import TfidfVectorizer from sklearn.feature_extraction.text
-import CountVectorizer from sklearn.feature_extraction.text 
-import linear_kernel from sklearn.metrics.pairwise
-import cosine_similarity from sklearn.metrics.pairwise
+import TfidfVectorizer from sklearn
+import CountVectorizer from sklearn
+import linear_kernel from sklearn
+import cosine_similarity from sklearn
 
 # Pour montrer toutes les colonnes d'un dataframe
 pd.set_option('display.max_columns', None)
