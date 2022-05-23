@@ -1,5 +1,6 @@
 # Cette application possède un lien permanent sur:
 # https://share.streamlit.io/marcochavez98/python_project_mbfa/main/main2.py
+# Github associé: https://github.com/MarcoChavez98/Python_Project_MBFA/blob/main/main2.py
 
 import streamlit as st
 import pandas as pd
@@ -100,5 +101,3 @@ def build_chart(genre, percentile=0.7):
 if st.button('Go!'):
     st.subheader('Here are your results! :popcorn:')
     st.dataframe(build_chart(genre_choice_str).head(number_of_films), height = 3000)
-  
-    
