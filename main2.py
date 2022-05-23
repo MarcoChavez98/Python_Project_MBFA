@@ -1,6 +1,3 @@
-#https://campus.datacamp.com/courses/building-recommendation-engines-in-python/content-based-recommendations?ex=9
-#Building recommendation engines -Content based recommendations
-
 # Cette application possède un lien permanent sur:
 # https://share.streamlit.io/marcochavez98/python_project_mbfa/main/main2.py
 
@@ -62,7 +59,8 @@ expander = st.expander('About')
 expander.markdown("""* **Development:** This app was developed by students from the *Paris 1 Panthéon-Sorbonne* 
 University MBFA program: Raquel Carvalho, Marco Chavez and Pierre-Yves Degez 
 * **Data source:** [Kaggle](https://www.kaggle.com/datasets/juzershakir/tmdb-movies-dataset?resource=download) 
-* **References:** [Kaggle: Content Based Recommendation by Omkaar Lavangare](https://www.kaggle.com/code/omkaarlavangare/content-based-recommendation/notebook)""")
+* **References:** [Kaggle: Content Based Recommendation by Omkaar Lavangare](https://www.kaggle.com/code/omkaarlavangare/content-based-recommendation/notebook),
+    [Datacamp: Building recommendation engines - Content based recommendations](https://campus.datacamp.com/courses/building-recommendation-engines-in-python/content-based-recommendations?ex=9):""")
 st.header('Spending more time choosing a movie than watching it?')
 st.subheader('Try our movie recommendator based on your preferences!')
 st.caption('Choose as many genres as you want')
