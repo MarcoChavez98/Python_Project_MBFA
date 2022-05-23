@@ -1,3 +1,6 @@
+#https://campus.datacamp.com/courses/building-recommendation-engines-in-python/content-based-recommendations?ex=9
+#Building recommendation engines -Content based recommendations
+
 # Cette application possède un lien permanent sur:
 # https://share.streamlit.io/marcochavez98/python_project_mbfa/main/main2.py
 
